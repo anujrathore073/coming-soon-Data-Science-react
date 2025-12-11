@@ -4,6 +4,6 @@
   "installCommand": "npm install",
   "framework": "create-react-app",
   "env": {
-    "CI": "false"
+   "CI": "false"
   }
 }
