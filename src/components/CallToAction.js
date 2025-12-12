@@ -12,13 +12,33 @@ function CallToAction() {
       return;
     }
 
-    console.log('Email submitted:', email);
-    setMessage('✓ Thanks! I\'ll get back to you soon.');
-    setEmail('');
+    const send = async () => {
+      try {
+        setMessage('Sending...');
+        const res = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
 
-    setTimeout(() => {
-      setMessage('');
-    }, 5000);
+        if (res.ok) {
+          setMessage("✓ Thanks! I'll get back to you soon.");
+          setEmail('');
+        } else {
+          const data = await res.json().catch(() => ({}));
+          setMessage(data.error || 'Error sending. Please try again later.');
+        }
+      } catch (err) {
+        console.error('Send error', err);
+        setMessage('Network error. Please try again later.');
+      }
+
+      setTimeout(() => {
+        setMessage('');
+      }, 5000);
+    };
+
+    send();
   };
 
   return (
