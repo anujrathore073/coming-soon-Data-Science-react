@@ -7,6 +7,7 @@ import CallToAction from './components/CallToAction';
 import SocialLinks from './components/SocialLinks';
 import ComingSoon from './components/ComingSoon';
 import Footer from './components/Footer';
+import { Analytics } from "@vercel/analytics/react"
 function App() {
   return (
     <div className="container">
@@ -19,6 +20,7 @@ function App() {
       </div>
       <Footer />
       <SpeedInsights />
+      <Analytics />
     </div>
   );
 }
